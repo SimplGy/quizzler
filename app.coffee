@@ -1,28 +1,51 @@
 
-
-isLoggedIn = false;
-loginBtn = document.getElementById 'FacebookLogin'
-questionsEl = document.getElementById 'Questions'
+# Global Appliation Variables
+isLoggedIn = false
 questions = []
+thinkingClass = 'thinking'
 
+# Cache DOM Elements
+goBtn = document.getElementById 'GoButton'
+questionsEl = document.getElementById 'Questions'
+
+
+# Helper Utils ----------------------------------------------------------------------------------------
+hasClass = (node, className) ->
+  idx = Array.prototype.indexOf.call node, className
+  if idx < 0
+    return undefined
+  else
+    return idx
+
+removeClass = (node, className) ->
+  idx = Array.prototype.indexOf.call node, className
+  return if idx < 0
+  node.classList.splice idx, 1
+
+
+# App Bootstrap ----------------------------------------------------------------------------------------
 window.fbAsyncInit = ->
   console.log 'facebook ready'
 
   FB.init
-    appId      : if window.location.hostname is 'localhost' then '1538582919703882' else '1538565359705638'
-    xfbml      : true
-    version    : 'v2.0'
+    appId  : if window.location.hostname is 'localhost' then '1538582919703882' else '1538565359705638'
+    xfbml  : true
+    version: 'v2.0'
 
   FB.getLoginStatus (response) ->
+    removeClass goBtn, thinkingClass
     if response.status is 'connected'
       onLogIn()
     else
       onLogOut()
 
 
-loginBtn.onclick = (evt) ->
+
+# Landing Page --------------------------------------------------------------------------------------
+goBtn.onclick = (evt) ->
+  return if hasClass goBtn, thinkingClass
+  goBtn.classList.push thinkingClass
   evt.preventDefault()
-  loginBtn.textContent = '...'
   if isLoggedIn
     FB.logout onLogOut
   else
@@ -34,43 +57,38 @@ loginBtn.onclick = (evt) ->
         console.warn 'User cancelled login or did not fully authorize.'
         onLogOut()
 
-
-
 onLogIn = ->
   isLoggedIn = true
-  loginBtn.textContent = 'Log Out'
-
-  FB.api 'me',                  (resp) -> console.log me:resp
-#  FB.api 'jsquizzler',          (resp) -> console.log jsQuizzler:resp
-#  FB.api 'jsquizzler/feed',     (resp) -> console.log jsQuizzlerFeed:resp
+  goBtn.textContent = 'Start'
+  FB.api 'me', (resp) -> console.log me:resp
   FB.api 'jsquizzler/statuses', gotQuizData
-
 
 onLogOut = ->
   isLoggedIn = false
-  loginBtn.textContent = 'Log In'
+  goBtn.textContent = 'Log In'
 
+
+
+# Quiz Page --------------------------------------------------------------------------------------
 gotQuizData = (resp) ->
   console.log resp.data
   parseFacebookPosts resp.data
-  showOneQuestion()
+  showAllQuestions()
 
 parseFacebookPosts = (posts) ->
   for quizItem in posts
     parsed = {}
-    parsed.A = quizItem.comments.data[0].message #.split('A:\n')
+    parsed.A = quizItem.comments?.data[0].message #.split('A:\n')
     q = quizItem.message.split('Q:\n')
     if q.length is 2
       parsed.Q = markdown.toHTML q[1]
     questions.push parsed
   questions
 
-
 showOneQuestion = (idx) ->
   idx = idx || 0
   questionsEl.innerHTML = questions[idx].Q
   Prism.highlightAll()
-
 
 showAllQuestions = ->
   markup = ''

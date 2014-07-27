@@ -1,10 +1,17 @@
+html {
+  height: 100%; }
+
 body {
+  min-height: 100%;
   font-family: "Source Sans Pro", Helvetica, helvetica, "helvetica neue", Verdana, sans-serif;
   line-height: 1.4;
   font-size: 16px;
   margin: 0;
-  padding: 10px;
-  text-align: center; }
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0; }
 
 h1, h2, h3 {
   margin: 0; }
@@ -15,43 +22,98 @@ h1, h2 {
 h1 {
   font-size: 200px; }
 
-h2 {
-  font-size: 58.0px; }
-
 body {
   background-color: #f2e059; }
   body footer {
     display: none; }
 
 .landing svg {
+  background-color: #f2e059;
   border: 4px solid black;
   width: 300px;
   margin-left: -60px; }
+.landing .title {
+  font-size: 58.0px; }
+.landing .btn {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  background-color: black;
+  color: #f2e059; }
 
 body.quiz {
   background-color: white;
   box-shadow: inset 0 3px 0 0 #f2e059; }
 
+section {
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 600px; }
+
 .btn {
   display: inline-block;
-  box-shadow: inset 0 0 0 3px #94bee6;
+  box-shadow: inset 0 0 0 4px black;
   height: 50px;
   line-height: 50px;
-  color: #94bee6;
+  color: black;
   text-decoration: none;
   font-weight: bold;
   padding: 0 20px;
   min-width: 50px;
-  text-align: center; }
+  text-align: center;
+  text-transform: uppercase; }
   .btn:hover {
-    background-color: #f9fbfd; }
+    background-color: #f2e161;
+    box-shadow: inset 0 0 0 4px black, 0 0 0 8px white; }
   .btn.wide {
     min-width: 200px; }
+  .btn.thinking {
+    background: black;
+    color: #f2e059; }
+
+.thinker {
+  display: none;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 1.2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 1.2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  animation-name: spin;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+.thinking .thinker {
+  display: block; }
 
 code {
   padding: 2px 5px !important; }
 
-.questions {
-  margin: 0 auto;
-  max-width: 500px;
-  text-align: left; }
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+
+  to {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+
+  to {
+    transform: rotate(360deg); } }
