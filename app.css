@@ -24,3 +24,11 @@ h1, h2, h3 {
     background-color: #f9fbfd; }
   .btn.wide {
     min-width: 200px; }
+
+code {
+  padding: 2px 5px !important; }
+
+.questions {
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: left; }
