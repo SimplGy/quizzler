@@ -1,7 +1,7 @@
-LIVERELOAD_PORT = 35729
-lrSnippet = require("connect-livereload")(port: LIVERELOAD_PORT)
-mountFolder = (connect, dir) ->
-  connect.static require("path").resolve(dir)
+#LIVERELOAD_PORT = 35729
+#lrSnippet = require("connect-livereload")(port: LIVERELOAD_PORT)
+#mountFolder = (connect, dir) ->
+#  connect.static require("path").resolve(dir)
 
 
 # # Globbing
@@ -11,57 +11,44 @@ mountFolder = (connect, dir) ->
 # 'test/spec/**/*.js'
 module.exports = (grunt) ->
 
-  # show elapsed time at the end
-  require("time-grunt") grunt
-
   # load all grunt tasks
   require("load-grunt-tasks") grunt
 
   # configurable paths
   cfg =
-    app: ""
+    app: '.'
     tmp: '.tmp'
 
   grunt.initConfig
     cfg: cfg
-    watch:
 
-      livereload:
+    # grunt-express will serve the files from the folders listed in `bases` on specified `port` and `hostname`
+    express:
+      app:
         options:
-          livereload: LIVERELOAD_PORT
+          port: 3001
+          hostname: "0.0.0.0"
+          bases: [ __dirname ] #  `__dirname` is actually a NodeJS variable storing the path to the folder containing the script accessing it, in this case the Gruntfile.
+          livereload: true
 
+    open: app: path: 'http://localhost:<%= express.app.options.port %>'
+
+    watch:
+      app:
+        options: livereload: true
         files: [
           "<%= cfg.app %>/*.html"
           "<%= cfg.app %>/{,*/}{,*/}{,*/}*.css"
           "<%= cfg.app %>/{,*/}{,*/}{,*/}*.js"
         ]
 
-    connect:
-      options:
-        port: 3001
-        hostname: "0.0.0.0"
-
-      livereload:
-        options:
-          keepalive: true
-          livereload: LIVERELOAD_PORT
-          middleware: (connect) ->
-            [
-              lrSnippet
-              mountFolder(connect, cfg.tmp)
-              mountFolder(connect, cfg.app)
-            ]
-
-
-    open:
-      server:
-        path: "http://localhost:<%= connect.options.port %>"
-
 
   # --------------------------------- Server Tasks
   grunt.registerTask "server", [
+    "express"
     "open"
-    "connect:livereload"
+#    "express-keepalive"
+    'watch'
   ]
 
 

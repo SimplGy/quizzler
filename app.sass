@@ -2,16 +2,22 @@
 
 // Global / Reset ---------------------------------------------------
 body
-  font-family: Helvetica, helvetica, 'helvetica neue', Verdana, sans-serif
+  font-family: 'Source Sans Pro', Helvetica, helvetica, 'helvetica neue', Verdana, sans-serif
   line-height: 1.4
+  font-size: 16px
   margin: 0
-  padding: 0
+  padding: 10px
   text-align: center
 
+$largestFont: 200px
 h1,h2,h3
   margin: 0
+h1, h2
+  line-height: .8
 h1
-  font-size: 30em
+  font-size: $largestFont
+h2
+  font-size: $largestFont * .29
 
 
 // Pages ----------------------------------------------------------------
@@ -20,6 +26,11 @@ body
   background-color: $jsYellow
   footer
     display: none
+.landing
+  svg
+    border: 4px solid black
+    width: 300px
+    margin-left: -60px
 
 body.quiz
   background-color: white
