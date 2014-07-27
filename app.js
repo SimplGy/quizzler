@@ -9,7 +9,7 @@
   window.fbAsyncInit = function() {
     console.log('facebook ready');
     FB.init({
-      appId: '1538565359705638',
+      appId: window.location.hostname === 'localhost' ? '1538582919703882' : '1538565359705638',
       xfbml: true,
       version: 'v2.0'
     });
