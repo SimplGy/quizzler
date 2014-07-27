@@ -1,4 +1,4 @@
-@import '__'
+@import 'sass/__'
 
 // Global / Reset ---------------------------------------------------
 html
@@ -14,6 +14,11 @@ body
   width: 100%
   top: 0
   bottom: 0
+  overflow: hidden
+  background-color: $jsYellow
+  box-shadow: inset 0 3px 0 0 $jsYellow
+img, svg
+  max-width: 100%
 
 $largestFont: 200px
 h1,h2,h3
@@ -27,8 +32,7 @@ h1
 
 // Pages ----------------------------------------------------------------
 // Landing Page
-body
-  background-color: $jsYellow
+body.landing
   footer
     display: none
 .landing.page
@@ -36,7 +40,7 @@ body
     margin-top: 50px
     background-color: $jsYellow
     border: 4px solid black
-    width: 300px
+    //max-width: 300px
     margin-left: -60px
   .title
     font-size: $largestFont * .29
@@ -45,21 +49,32 @@ body
     bottom: 50px
     left: 50px
     right: 50px
-    background-color: black
-    color: $jsYellow
 
-body.quiz
-  background-color: white
-  box-shadow: inset 0 3px 0 0 $jsYellow
+  +phoneHeight
+    svg
+      margin-top: 20px
+    .btn
+      bottom: 20px
+
+//body.quiz
+//  background-color: white
+//  box-shadow: inset 0 3px 0 0 $jsYellow
 // Any page's main region
 section
-
-  //.centered
+  //-moz-transform: translateX(100%)
+  //-webkit-transform: translateX(100%)
+  //transform: translateX(100%)
+  display: none
   position: relative
   height: 100%
   margin: 0 auto
   min-width: 320px
   max-width: 600px
+.landing .landing.page,
+.quiz .quiz.page,
+.results .results.page
+  display: block
+
 
 
 // Reused Components ---------------------------------------------------
@@ -77,13 +92,31 @@ section
   text-align: center
   text-transform: uppercase
   &:hover
-    background-color: mix($jsYellow,white,95%)
     box-shadow: inset 0 0 0 4px black, 0 0 0 4px $jsYellow, 0 0 0 8px white
+  //&:active
   &.wide
     min-width: 200px
-  &.thinking
+  //&.thinking
+  //  background: black
+  //  color: $jsYellow
+.btn.primary
+  background-color: black
+  color: $jsYellow
+
+.link
+  display: inline-block
+  color: black
+  font-weight: bold
+  text-transform: uppercase
+  border-bottom: 4px dotted black
+  text-decoration: none
+  padding: 0 3px
+  height: 24px
+  &:hover
     background: black
     color: $jsYellow
+    border-bottom-style: solid
+
 
 .thinker
   display: none
@@ -112,7 +145,15 @@ code
 //  border-radius: 2px
 
 
-
+// Footer ----------------------------------------------------------------
+footer
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: 40px
+  line-height: 30px
+  text-align: center
 
 
 @-moz-keyframes spin

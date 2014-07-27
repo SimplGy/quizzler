@@ -6,7 +6,15 @@ thinkingClass = 'thinking'
 
 # Cache DOM Elements
 goBtn = document.getElementById 'GoButton'
+skipBtn = document.getElementById 'SkipBtn'
+logOutBtn = document.getElementById 'LogOutBtn'
+body = document.getElementsByTagName('body')[0]
 questionsEl = document.getElementById 'Questions'
+#pageEls = document.getElementsByClassName 'page'
+#pages = {}
+# Transform page els into a hash by pageName
+#for page in pageEls
+
 
 
 # Helper Utils ----------------------------------------------------------------------------------------
@@ -21,6 +29,19 @@ removeClass = (node, className) ->
   idx = Array.prototype.indexOf.call node, className
   return if idx < 0
   node.classList.splice idx, 1
+
+
+# Navigation --------------------------------------------------------------------------------------
+app = {}
+app.showPage = (pageName) ->
+  body.className = pageName
+#  page = pages[pageName]
+#  return unless page
+#  for page in pages
+#    removeClass page 'show'
+
+app.showPage 'landing' # start page
+
 
 
 # App Bootstrap ----------------------------------------------------------------------------------------
@@ -40,24 +61,19 @@ window.fbAsyncInit = ->
       onLogOut()
 
 
-# Navigation --------------------------------------------------------------------------------------
-app = {}
-app.showPage = (page) ->
-  pageEl = document.getElementsByClassName page + ' page' # Pages are expected to have 2 classes: the page name and the class `page`
-  return unless pageEl.length is 1
-  pageEl = pageEl[0]
 
 
 
 
 # Landing Page --------------------------------------------------------------------------------------
 goBtn.onclick = (evt) ->
-  return if hasClass goBtn, thinkingClass
-  goBtn.classList.push thinkingClass
   evt.preventDefault()
+  return if hasClass goBtn, thinkingClass
   if isLoggedIn
-    FB.logout onLogOut
+#    FB.logout onLogOut
+    app.showPage 'quiz'
   else
+    Array.prototype.push.call goBtn.classList, thinkingClass
     FB.login  (resp) ->
       if resp.authResponse
         console.log 'Login successful'
@@ -67,13 +83,14 @@ goBtn.onclick = (evt) ->
         onLogOut()
 
 onLogIn = ->
-  isLoggedIn = true
+  console.log 'isLoggedIn', isLoggedIn = true
   goBtn.textContent = 'Start'
   FB.api 'me', (resp) -> console.log me:resp
   FB.api 'jsquizzler/statuses', gotQuizData
 
 onLogOut = ->
-  isLoggedIn = false
+  console.log 'isLoggedIn', isLoggedIn = false
+  app.showPage 'landing'
   goBtn.textContent = 'Log In'
 
 gotQuizData = (resp) ->
@@ -84,6 +101,13 @@ gotQuizData = (resp) ->
 
 
 # Quiz Page --------------------------------------------------------------------------------------
+skipBtn.onclick = (evt) ->
+  evt.preventDefault()
+  app.showPage 'results'
+
+logOutBtn.onclick = (evt) ->
+  evt.prevendDefault()
+  FB.logout onLogOut
 
 #  showAllQuestions()
 

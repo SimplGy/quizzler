@@ -11,7 +11,13 @@ body {
   position: absolute;
   width: 100%;
   top: 0;
-  bottom: 0; }
+  bottom: 0;
+  overflow: hidden;
+  background-color: #f2e059;
+  box-shadow: inset 0 3px 0 0 #f2e059; }
+
+img, svg {
+  max-width: 100%; }
 
 h1, h2, h3 {
   margin: 0; }
@@ -22,16 +28,13 @@ h1, h2 {
 h1 {
   font-size: 200px; }
 
-body {
-  background-color: #f2e059; }
-  body footer {
-    display: none; }
+body.landing footer {
+  display: none; }
 
 .landing.page svg {
   margin-top: 50px;
   background-color: #f2e059;
   border: 4px solid black;
-  width: 300px;
   margin-left: -60px; }
 .landing.page .title {
   font-size: 58.0px; }
@@ -39,20 +42,25 @@ body {
   position: absolute;
   bottom: 50px;
   left: 50px;
-  right: 50px;
-  background-color: black;
-  color: #f2e059; }
-
-body.quiz {
-  background-color: white;
-  box-shadow: inset 0 3px 0 0 #f2e059; }
+  right: 50px; }
+@media (max-height: 603px) {
+  .landing.page svg {
+    margin-top: 20px; }
+  .landing.page .btn {
+    bottom: 20px; } }
 
 section {
+  display: none;
   position: relative;
   height: 100%;
   margin: 0 auto;
   min-width: 320px;
   max-width: 600px; }
+
+.landing .landing.page,
+.quiz .quiz.page,
+.results .results.page {
+  display: block; }
 
 .btn {
   display: inline-block;
@@ -67,13 +75,27 @@ section {
   text-align: center;
   text-transform: uppercase; }
   .btn:hover {
-    background-color: #f2e161;
     box-shadow: inset 0 0 0 4px black, 0 0 0 4px #f2e059, 0 0 0 8px white; }
   .btn.wide {
     min-width: 200px; }
-  .btn.thinking {
+
+.btn.primary {
+  background-color: black;
+  color: #f2e059; }
+
+.link {
+  display: inline-block;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 4px dotted black;
+  text-decoration: none;
+  padding: 0 3px;
+  height: 24px; }
+  .link:hover {
     background: black;
-    color: #f2e059; }
+    color: #f2e059;
+    border-bottom-style: solid; }
 
 .thinker {
   display: none;
@@ -97,6 +119,15 @@ section {
 
 code {
   padding: 2px 5px !important; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  line-height: 30px;
+  text-align: center; }
 
 @-moz-keyframes spin {
   from {

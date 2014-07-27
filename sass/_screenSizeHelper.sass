@@ -1,0 +1,33 @@
+// https://gist.github.com/SimpleAsCouldBe/6197533
+//Usage:
+//h1
+//  font-size: 50px
+//  +phone
+//    font-size: 25px
+
+$sizePhone: 603px
+$sizeTablet: 1024px
+
+@mixin phone
+  @media (max-width: $sizePhone)
+    @content
+
+@mixin tablet
+  @media (min-width: $sizePhone+1) and (max-width: $sizeTablet)
+    @content
+
+@mixin desktop
+  @media (min-width: $sizeTablet+1)
+    @content
+
+@mixin phoneHeight
+  @media (max-height: $sizePhone)
+    @content
+
+@mixin tabletHeight
+  @media (min-height: $sizePhone+1) and (max-width: $sizeTablet)
+    @content
+
+@mixin desktopHeight
+  @media (min-height: $sizeTablet+1)
+    @content
