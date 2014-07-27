@@ -18,27 +18,22 @@ module.exports = (grunt) ->
   require("load-grunt-tasks") grunt
 
   # configurable paths
-  yeomanConfig =
+  cfg =
     app: ""
     tmp: '.tmp'
 
   grunt.initConfig
-    yeoman: yeomanConfig
+    cfg: cfg
     watch:
 
-      styles:
-        files: ["<%= yeoman.app %>/styles/{,*/}*.css"]
-        tasks: ["copy:styles"]
-
       livereload:
-#        options:
-#          livereload: LIVERELOAD_PORT
+        options:
+          livereload: LIVERELOAD_PORT
 
         files: [
-          "<%= yeoman.app %>/*.html"
-          "<%= yeoman.app %>/{,*/}{,*/}{,*/}*.css"
-          "<%= yeoman.app %>/{,*/}{,*/}{,*/}*.js"
-          "<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
+          "<%= cfg.app %>/*.html"
+          "<%= cfg.app %>/{,*/}{,*/}{,*/}*.css"
+          "<%= cfg.app %>/{,*/}{,*/}{,*/}*.js"
         ]
 
     connect:
@@ -52,9 +47,9 @@ module.exports = (grunt) ->
           livereload: LIVERELOAD_PORT
           middleware: (connect) ->
             [
-#              lrSnippet
-              mountFolder(connect, yeomanConfig.tmp)
-              mountFolder(connect, yeomanConfig.app)
+              lrSnippet
+              mountFolder(connect, cfg.tmp)
+              mountFolder(connect, cfg.app)
             ]
 
 

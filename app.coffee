@@ -2,6 +2,7 @@
 
 isLoggedIn = false;
 loginBtn = document.getElementById 'FacebookLogin'
+questionsEl = document.getElementById 'Questions'
 questions = []
 
 window.fbAsyncInit = ->
@@ -51,18 +52,8 @@ onLogOut = ->
 
 gotQuizData = (resp) ->
   console.log resp.data
-  el = document.getElementById 'Questions'
   parseFacebookPosts resp.data
-  markup = ''
-  for question in questions
-    markup += question.Q
-  el.innerHTML = markup
-  Prism.highlightAll()
-
-
-
-#  el.innerHTML = markup
-
+  showOneQuestion()
 
 parseFacebookPosts = (posts) ->
   for quizItem in posts
@@ -75,3 +66,15 @@ parseFacebookPosts = (posts) ->
   questions
 
 
+showOneQuestion = (idx) ->
+  idx = idx || 0
+  questionsEl.innerHTML = questions[idx].Q
+  Prism.highlightAll()
+
+
+showAllQuestions = ->
+  markup = ''
+  for question in questions
+    markup += question.Q
+  questionsEl.innerHTML = markup
+  Prism.highlightAll()

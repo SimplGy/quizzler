@@ -8,10 +8,21 @@ body {
 h1, h2, h3 {
   margin: 0; }
 
+h1 {
+  font-size: 30em; }
+
+body {
+  background-color: #f0db4f; }
+  body footer {
+    display: none; }
+
+body.quiz {
+  background-color: white;
+  box-shadow: inset 0 3px 0 0 #f0db4f; }
+
 .btn {
   display: inline-block;
   box-shadow: inset 0 0 0 3px #94bee6;
-  border-radius: 5px;
   height: 50px;
   line-height: 50px;
   color: #94bee6;
