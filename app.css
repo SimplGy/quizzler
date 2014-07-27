@@ -27,14 +27,15 @@ body {
   body footer {
     display: none; }
 
-.landing svg {
+.landing.page svg {
+  margin-top: 50px;
   background-color: #f2e059;
   border: 4px solid black;
   width: 300px;
   margin-left: -60px; }
-.landing .title {
+.landing.page .title {
   font-size: 58.0px; }
-.landing .btn {
+.landing.page .btn {
   position: absolute;
   bottom: 50px;
   left: 50px;
@@ -55,7 +56,7 @@ section {
 
 .btn {
   display: inline-block;
-  box-shadow: inset 0 0 0 4px black;
+  box-shadow: inset 0 0 0 4px black, 0 0 0 4px #f2e059;
   height: 50px;
   line-height: 50px;
   color: black;
@@ -67,7 +68,7 @@ section {
   text-transform: uppercase; }
   .btn:hover {
     background-color: #f2e161;
-    box-shadow: inset 0 0 0 4px black, 0 0 0 8px white; }
+    box-shadow: inset 0 0 0 4px black, 0 0 0 4px #f2e059, 0 0 0 8px white; }
   .btn.wide {
     min-width: 200px; }
   .btn.thinking {

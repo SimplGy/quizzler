@@ -40,6 +40,15 @@ window.fbAsyncInit = ->
       onLogOut()
 
 
+# Navigation --------------------------------------------------------------------------------------
+app = {}
+app.showPage = (page) ->
+  pageEl = document.getElementsByClassName page + ' page' # Pages are expected to have 2 classes: the page name and the class `page`
+  return unless pageEl.length is 1
+  pageEl = pageEl[0]
+
+
+
 
 # Landing Page --------------------------------------------------------------------------------------
 goBtn.onclick = (evt) ->
@@ -67,13 +76,16 @@ onLogOut = ->
   isLoggedIn = false
   goBtn.textContent = 'Log In'
 
-
-
-# Quiz Page --------------------------------------------------------------------------------------
 gotQuizData = (resp) ->
   console.log resp.data
   parseFacebookPosts resp.data
-  showAllQuestions()
+
+
+
+
+# Quiz Page --------------------------------------------------------------------------------------
+
+#  showAllQuestions()
 
 parseFacebookPosts = (posts) ->
   for quizItem in posts
