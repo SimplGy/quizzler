@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Crowd Quiz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+
+
+<h1>Crowd Quiz</h1>
+
+<a class="btn wide" id="FacebookLogin" href>...</a>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="fb-root"></div>
+
+
+<div
+        class="fb-like"
+        data-send="true"
+        data-width="50"
+        data-show-faces="true">
+</div>
+
+
+
+
+
+
+<!-- My Code -->
+<script type="text/javascript" src="app.js"></script>
+<!-- Facebook SDK -->
+<script>
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>

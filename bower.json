@@ -1,0 +1,14 @@
+{
+  "name": "crowdQuiz",
+  "version": "0.0.0",
+  "authors": [
+    "Eric <hi@simple.gy>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {}
+}
