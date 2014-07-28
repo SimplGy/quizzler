@@ -38,8 +38,9 @@ module.exports = (grunt) ->
         options: livereload: true
         files: [
           "<%= cfg.app %>/*.html"
-          "<%= cfg.app %>/{,*/}{,*/}{,*/}*.css"
-          "<%= cfg.app %>/{,*/}{,*/}{,*/}*.js"
+          "<%= cfg.app %>/{,*/}*.css"
+          "<%= cfg.app %>/*.js"
+          "<%= cfg.app %>/{,*/}*.js"
         ]
 
 
